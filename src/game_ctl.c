@@ -1,13 +1,27 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   game_ctl.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: anashwan <anashwan@student.42amman.com>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/01/02 00:52:21 by anashwan          #+#    #+#             */
+/*   Updated: 2026/01/02 00:52:22 by anashwan         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 # include "so_long.h"
 
-t_game *create_game()
+t_game *create_game(char **map)
 {
 	t_game *game;
 
+	if (!map)
+		return (NULL);
 	game = malloc(sizeof(t_game));
 	if (!game)
 		return (NULL);
-	game->map = NULL;
+	game->map = map;
 	game->height = 0;
 	game->width = 0 ;
 	game->position[0] = 0;

@@ -6,7 +6,7 @@
 /*   By: anashwan <anashwan@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/26 19:08:08 by anashwan          #+#    #+#             */
-/*   Updated: 2026/01/01 20:24:39 by anashwan         ###   ########.fr       */
+/*   Updated: 2026/01/01 20:39:54 by anashwan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	find_player(t_game *game);
 int	    check_components(t_game *game);
 int     check_chars(t_game *game);
 int     validate_map(t_game *game);
-t_game  *create_game();
+t_game *create_game(char **map);
 char    **get_map(int fd);
 void	free_game(t_game *game);
 void	*free_split(char **list, int elements);

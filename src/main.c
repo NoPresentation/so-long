@@ -8,11 +8,8 @@ int main(int argc, char **argv)
     if (argc != 2)
         return (0);
     fd = open(argv[1], O_RDONLY);
-	game = create_game();
-	if (!game)
-		return (-1);
-	game->map = get_map(fd);
-    if (!(game->map) || !validate_map(game))
+	game = create_game(get_map(fd));
+    if (!game || !validate_map(game))
     {
         ft_putstr_fd("Error\n", 2);
 		free_game(game);
