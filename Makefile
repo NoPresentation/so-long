@@ -5,6 +5,8 @@ CFLAGS = -g -Wall -Werror -Wextra
 NAME = so_long
 
 SRC = 	./src/main.c \
+		./src/validate_map.c \
+		./src/game_ctl.c \
 		./get_next_line/get_next_line.c \
 		./get_next_line/get_next_line_utils.c \
 
