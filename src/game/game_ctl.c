@@ -6,11 +6,11 @@
 /*   By: anashwan <anashwan@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/02 00:52:21 by anashwan          #+#    #+#             */
-/*   Updated: 2026/01/02 00:52:22 by anashwan         ###   ########.fr       */
+/*   Updated: 2026/01/02 01:37:03 by anashwan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "so_long.h"
+# include "../so_long.h"
 
 t_game *create_game(char **map)
 {

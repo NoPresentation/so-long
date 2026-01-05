@@ -6,7 +6,7 @@
 /*   By: anashwan <anashwan@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/26 19:08:08 by anashwan          #+#    #+#             */
-/*   Updated: 2026/01/01 20:39:54 by anashwan         ###   ########.fr       */
+/*   Updated: 2026/01/05 04:16:06 by anashwan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,18 +19,62 @@
 #include <unistd.h>
 #include <fcntl.h>
 #include <stdbool.h>
+#include "../mlx/mlx.h"
+
+
+# define IMG_HEIGHT			32
+# define IMG_WIDTH			32
+
+# define WALL				'1'
+# define FLOOR 				'0'
+# define COINS  			'C'
+# define PLAYER				'P'
+# define MAP_EXIT 		 	'E'
+
+# define KEY_W				119
+# define KEY_A				97
+# define KEY_S				115
+# define KEY_D				100
+
+# define KEY_UP  			65362
+# define KEY_LEFT  			65361
+# define KEY_RIGHT 			65363
+# define KEY_DOWN  			65364
+
+# define KEY_Q				113
+# define KEY_ESC  			65307
+
+# define FRONT				1
+# define LEFT				2
+# define RIGHT				3
+# define BACK				4
 
 typedef struct s_game
 {
+    /* Map data */
     char    **map;
     size_t  width;
     size_t  height;
     size_t  collectables;
     size_t  position[2];
+
+    /* MLX core */
+    void    *mlx;
+    void    *win;
+
+    /* Images */
+    void    *wall_img;
+    void    *floor_img;
+    void    *player_img;
+    void    *exit_img;
+    void    *coin_img;
+
+    /* Image size (required by mlx_xpm_file_to_image) */
+    int     img_w;
+    int     img_h;
 } t_game;
 
 int     validate_map(t_game *game);
-void	free_game(t_game *game);
 int	    check_rectangle(t_game *game);
 int	    check_walls(t_game *game);
 void	flood_fill(char **map, size_t width, size_t height, int x, int y);
@@ -40,10 +84,15 @@ int	    count_occurance(const char *s, char c);
 void	find_player(t_game *game);
 int	    check_components(t_game *game);
 int     check_chars(t_game *game);
-int     validate_map(t_game *game);
 t_game *create_game(char **map);
 char    **get_map(int fd);
 void	free_game(t_game *game);
 void	*free_split(char **list, int elements);
 char	*read_map(int fd);
+
+void    init_mlx(t_game *game);
+void    load_images(t_game *game);
+void    render_map(t_game *game);
+int     handle_key(int keycode, t_game *game);
+
 #endif

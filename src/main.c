@@ -22,5 +22,6 @@ int main(int argc, char **argv)
 		i++;
 	}
 	ft_printf("OK\n");
+	start_game(game);
     return (1);
 }
