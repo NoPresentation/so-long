@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   start_game.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anashwan <anashwan@student.42amman.com>    +#+  +:+       +#+        */
+/*   By: anashwan <anashwan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/03 22:34:41 by anashwan          #+#    #+#             */
-/*   Updated: 2026/01/05 04:25:16 by anashwan         ###   ########.fr       */
+/*   Updated: 2026/01/05 17:38:58 by anashwan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,11 @@ void	init_mlx(t_game *game)
 		game->height * IMG_HEIGHT,
 		"So Long"
 	);
+	if (!game->win)
+	{
+		free(game->mlx);
+		return ;
+	}
 }
 
 
