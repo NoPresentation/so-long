@@ -6,7 +6,7 @@
 /*   By: anashwan <anashwan@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/03 22:34:41 by anashwan          #+#    #+#             */
-/*   Updated: 2026/01/08 23:09:51 by anashwan         ###   ########.fr       */
+/*   Updated: 2026/01/09 01:28:39 by anashwan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int	load_images(t_game *game)
 	game->floor_img = mlx_xpm_file_to_image(game->mlx, "/home/ahmad_nashwan/core/so_long/imgs/green.xpm", &w, &h);
 	if (!game->floor_img)
 		return (0);
-	game->player_img = mlx_xpm_file_to_image(game->mlx, "/home/ahmad_nashwan/core/so_long/imgs/bird.xpm", &w, &h);
+	game->player_img = mlx_xpm_file_to_image(game->mlx, "/home/ahmad_nashwan/core/so_long/imgs/bird_right.xpm", &w, &h);
 	if (!game->player_img)
 		return (0);
 	game->coin_img = mlx_xpm_file_to_image(game->mlx, "/home/ahmad_nashwan/core/so_long/imgs/apple.xpm", &w, &h);
@@ -79,8 +79,8 @@ void render_map(t_game *game)
 		w = 0;
 		while (w < game->width)
 		{
-			x = w * IMG_WIDTH;
-			y = h * IMG_HEIGHT;
+			x = w * 64;
+			y = h * 64;
 			
 			fill_pixel(game, game->map[h][w], x, y);
 			w++;

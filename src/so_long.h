@@ -6,7 +6,7 @@
 /*   By: anashwan <anashwan@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/26 19:08:08 by anashwan          #+#    #+#             */
-/*   Updated: 2026/01/08 21:54:45 by anashwan         ###   ########.fr       */
+/*   Updated: 2026/01/09 01:31:21 by anashwan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@
 #include "../mlx/mlx.h"
 
 
-# define IMG_HEIGHT			32
-# define IMG_WIDTH			32
+# define IMG_HEIGHT			64
+# define IMG_WIDTH			64
 
 # define WALL				'1'
 # define FLOOR 				'0'
