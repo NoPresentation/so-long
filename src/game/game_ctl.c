@@ -6,7 +6,7 @@
 /*   By: anashwan <anashwan@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/02 00:52:21 by anashwan          #+#    #+#             */
-/*   Updated: 2026/01/02 01:37:03 by anashwan         ###   ########.fr       */
+/*   Updated: 2026/01/08 21:14:14 by anashwan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,88 +24,47 @@ t_game *create_game(char **map)
 	game->map = map;
 	game->height = 0;
 	game->width = 0 ;
-	game->position[0] = 0;
-	game->position[0] = 1;
-	game->collectables = 0;
+	game->mlx = NULL;
+	game->win = NULL;
+	game->pos_x = 0;
+	game->pos_y = 0;
+	game->exit_y = 0;
+	game->exit_x = 0;
+	game->coins = 0;
+	game->moves = 0;
+	game->floor_img = NULL;
+	game->coin_img = NULL;
+	game->wall_img = NULL;
+	game->exit_img = NULL;
+	game->player_img = NULL;
 	return (game);
 }
 
-bool correct_len(char *line, size_t len)
+void	win_game(t_game *game)
 {
-	size_t line_len;
-
-	line_len = ft_strlen(line);
-	if (line[line_len - 1] == '\n')
-		line_len--;
-	if (line_len != len)
-		return (false);
-	return (true);
+	ft_putstr_fd("YOU WON!!\nMOVES: %d\n", game->moves);
+	close_game(game);
 }
 
-char	*read_map(int fd)
+int close_game(void *ptr)
 {
-	char	*line;
-	char	*reader;
-	char	*temp;
-	size_t	len;
+	t_game *game;
 
-	reader = ft_strdup("");
-	line = get_next_line(fd);
-	len = ft_strlen(line) - 1;
-	while (line)
-	{
-		if (!correct_len(line, len))
-		{
-			free(reader);
-			free(line);
-			return (NULL);
-		}
-		temp = reader;
-		reader = ft_strjoin(reader, line);
-		free(line);
-		free(temp);
-		line = get_next_line(fd);
-	}
-	free(line);
-	return (reader);
-}
-
-char **get_map(int fd)
-{
-	char	*reader;
-	char	**map;
-
-	if (fd == -1)
-		return (NULL);
-    reader = read_map(fd);
-	if (!reader)
-		return (NULL);
-	map = ft_split(reader, '\n');
-	free(reader);
-	if (!map || map[0] == NULL)
-		return (NULL);
-	return (map);
-}
-
-void	*free_split(char **list, int elements)
-{
-	int	i;
-
-	i = 0;
-	while (i < elements)
-	{
-		free(list[i]);
-		i++;
-	}
-	free(list);
-	return (NULL);
-}
-
-void	free_game(t_game *game)
-{
-	if (!game)
-		return ;
-	if (game->map)
-		free_split(game->map, game->height);
-	free(game);
+	game =(t_game *)ptr;
+    if (game->player_img)
+        mlx_destroy_image(game->mlx, game->player_img);
+    if (game->floor_img)
+        mlx_destroy_image(game->mlx, game->floor_img);
+    if (game->wall_img)
+        mlx_destroy_image(game->mlx, game->wall_img);
+    if (game->coin_img)
+        mlx_destroy_image(game->mlx, game->coin_img);
+    if (game->exit_img)
+        mlx_destroy_image(game->mlx, game->exit_img);
+    if (game->win)
+        mlx_destroy_window(game->mlx, game->win);
+    if (game->map)
+        free_split(game->map, game->height); 
+    exit(0);
+    return (0);
 }

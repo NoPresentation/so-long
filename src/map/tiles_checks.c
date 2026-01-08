@@ -6,7 +6,7 @@
 /*   By: anashwan <anashwan@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/02 00:49:44 by anashwan          #+#    #+#             */
-/*   Updated: 2026/01/02 00:51:03 by anashwan         ###   ########.fr       */
+/*   Updated: 2026/01/08 17:12:46 by anashwan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ int	check_components(t_game *game)
 	}
 	if (p != 1 || e != 1 || c < 1)
 		return (0);
-	game->collectables = c;
+	game->coins = c;
 	return (1);
 }
 

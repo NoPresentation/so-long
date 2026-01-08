@@ -1,14 +1,18 @@
 CC = cc
 
-CFLAGS = -g -Wall -Werror -Wextra
+CFLAGS = -g -Wall -Werror -Wextra 
 
 NAME = so_long
 
 SRC = 	./src/main.c \
 		./src/game/game_ctl.c \
-		./src/map_checks/validate_map.c \
-		./src/map_checks/path_checks.c \
-		./src/map_checks/tiles_checks.c \
+		./src/game/start_game.c \
+		./src/game/moves.c \
+		./src/game/event_handle.c \
+		./src/map/validate_map.c \
+		./src/map/path_checks.c \
+		./src/map/tiles_checks.c \
+		./src/map/get_map.c \
 		./get_next_line/get_next_line.c \
 		./get_next_line/get_next_line_utils.c \
 
@@ -18,7 +22,9 @@ LIBFT =	./libft/libft.a
 
 FT_PRINTF = ./ft_printf/libftprintf.a
 
-LIB = $(LIBFT) $(FT_PRINTF)
+MLX = -L./mlx -lmlx -lXext -lX11 -lm -lz
+
+LIB = $(LIBFT) $(FT_PRINTF) $(MLX)
 
 
 all: $(NAME)
@@ -34,6 +40,9 @@ $(LIBFT):
 
 $(FT_PRINTF):
 	$(MAKE) -C ft_printf
+
+$(MLX):
+	$(MAKE) -C mlx CC="gcc -std=gnu99 -Wno-implicit-function-declaration"
 
 clean:
 	$(MAKE) -C libft clean

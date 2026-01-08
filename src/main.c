@@ -6,14 +6,14 @@ int main(int argc, char **argv)
 	t_game	*game;
 
     if (argc != 2)
-        return (0);
+        return (-1);
     fd = open(argv[1], O_RDONLY);
 	game = create_game(get_map(fd));
     if (!game || !validate_map(game))
     {
-        ft_putstr_fd("Error\n", 2);
-		free_game(game);
-        return (-1);
+        ft_putstr_fd("Error in\n", 2);
+		close_game(game);
+		return (-1);
     }
 	int i = 0;
 	while (game->map[i])
@@ -23,5 +23,5 @@ int main(int argc, char **argv)
 	}
 	ft_printf("OK\n");
 	start_game(game);
-    return (1);
+    return (0);
 }

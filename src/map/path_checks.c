@@ -6,7 +6,7 @@
 /*   By: anashwan <anashwan@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/02 01:13:43 by anashwan          #+#    #+#             */
-/*   Updated: 2026/01/02 01:16:26 by anashwan         ###   ########.fr       */
+/*   Updated: 2026/01/08 21:55:10 by anashwan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,9 @@ int is_valid_path(char **map, size_t width, size_t height)
     return (1);
 }
 
-void	flood_fill(char **map, size_t width, size_t height, int x, int y)
+void	flood_fill(char **map, size_t width, size_t height, size_t x, size_t y)
 {
-	if (x < 0 || x >= (int)height || y < 0 || y >= (int)width)
+	if (x >= height || y >= width)
 		return ;
 	if (map[x][y] == '1' || map[x][y] == 'V')
 		return ;
@@ -80,8 +80,8 @@ int	check_path(t_game *game)
 		map_copy,
 		game->width,
 		game->height,
-		game->position[0],
-		game->position[1]
+		game->pos_x,
+		game->pos_x
 	);
 	if (!is_valid_path(map_copy, game->width, game->height))
 	{
