@@ -15,13 +15,6 @@ int main(int argc, char **argv)
 		close_game(game);
 		return (-1);
     }
-	int i = 0;
-	while (game->map[i])
-	{
-		ft_printf("%s\n", game->map[i]);
-		i++;
-	}
-	ft_printf("OK\n");
 	start_game(game);
     return (0);
 }

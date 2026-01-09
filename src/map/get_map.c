@@ -6,7 +6,7 @@
 /*   By: anashwan <anashwan@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/08 20:49:15 by anashwan          #+#    #+#             */
-/*   Updated: 2026/01/08 21:06:25 by anashwan         ###   ########.fr       */
+/*   Updated: 2026/01/09 01:42:38 by anashwan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,5 +80,6 @@ char **get_map(int fd)
 	free(reader);
 	if (!map || map[0] == NULL)
 		return (NULL);
+	close(fd);
 	return (map);
 }

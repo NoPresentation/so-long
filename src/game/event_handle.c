@@ -6,11 +6,11 @@
 /*   By: anashwan <anashwan@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/08 16:33:15 by anashwan          #+#    #+#             */
-/*   Updated: 2026/01/08 21:11:11 by anashwan         ###   ########.fr       */
+/*   Updated: 2026/01/09 03:20:07 by anashwan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "../so_long.h"
+#include "../so_long.h"
 
 void	try_move(t_game *game, size_t new_y, size_t new_x)
 {
@@ -28,6 +28,7 @@ void	try_move(t_game *game, size_t new_y, size_t new_x)
 	game->pos_y = new_y;
 	game->pos_x = new_x;
 	game->moves++;
+	ft_printf("Moves: %d\n", game->moves);
 	mlx_clear_window(game->mlx, game->win);
 	render_map(game);
 }
@@ -35,14 +36,20 @@ void	try_move(t_game *game, size_t new_y, size_t new_x)
 int	handle_key(int key_code, void *ptr)
 {
 	t_game *game = (t_game *)ptr;
-	if (key_code == KEY_UP || key_code == FRONT)
+	if (key_code == W || key_code == UP)
 		move_up(game);
-	else if (key_code == KEY_DOWN || key_code == BACK)
+	else if (key_code == S || key_code == DOWN)
 		move_down(game);
-	else if (key_code == KEY_RIGHT || key_code == RIGHT)
+	else if (key_code == D || key_code == RIGHT)
+	{
+		game->dir = 1;
 		move_right(game);
-	else if (key_code == KEY_LEFT || key_code == LEFT)
+	}
+	else if (key_code == A || key_code == LEFT)
+	{
+		game->dir = 0;
 		move_left(game);
+	}
 	else if (key_code == KEY_ESC || key_code == KEY_Q)
 		close_game(game);
 	return (0);

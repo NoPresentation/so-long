@@ -10,33 +10,32 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "../so_long.h"
-
+#include "../so_long.h"
 
 void	move_up(t_game *game)
 {
 	if (game->map[game->pos_y - 1][game->pos_x] == '1')
-		return ;	
+		return ;
 	try_move(game, game->pos_y - 1, game->pos_x);
 }
 
 void	move_down(t_game *game)
 {
 	if (game->map[game->pos_y + 1][game->pos_x] == '1')
-		return ;	
+		return ;
 	try_move(game, game->pos_y + 1, game->pos_x);
 }
 
 void	move_left(t_game *game)
 {
 	if (game->map[game->pos_y][game->pos_x - 1] == '1')
-		return ;	
+		return ;
 	try_move(game, game->pos_y, game->pos_x - 1);
 }
 
 void	move_right(t_game *game)
 {
 	if (game->map[game->pos_y][game->pos_x + 1] == '1')
-		return ;	
+		return ;
 	try_move(game, game->pos_y, game->pos_x + 1);
 }

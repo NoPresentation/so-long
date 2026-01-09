@@ -6,7 +6,7 @@
 /*   By: anashwan <anashwan@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/26 19:08:08 by anashwan          #+#    #+#             */
-/*   Updated: 2026/01/09 01:31:21 by anashwan         ###   ########.fr       */
+/*   Updated: 2026/01/09 03:26:08 by anashwan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,23 +31,18 @@
 # define PLAYER				'P'
 # define MAP_EXIT 		 	'E'
 
-# define KEY_W				119
-# define KEY_A				97
-# define KEY_S				115
-# define KEY_D				100
+# define W				119
+# define A				97
+# define S				115
+# define D				100
 
-# define KEY_UP  			65362
-# define KEY_LEFT  			65361
-# define KEY_RIGHT 			65363
-# define KEY_DOWN  			65364
+# define UP  			65362
+# define LEFT  			65361
+# define RIGHT 			65363
+# define DOWN  			65364
 
 # define KEY_Q				113
 # define KEY_ESC  			65307
-
-# define FRONT				1
-# define LEFT				2
-# define RIGHT				3
-# define BACK				4
 
 typedef struct s_game
 {
@@ -60,6 +55,7 @@ typedef struct s_game
     size_t  pos_y;
     size_t  exit_x;
     size_t  exit_y;
+    int     dir;
     
     /* MLX core */
     void    *mlx;
@@ -68,7 +64,8 @@ typedef struct s_game
     /* Images */
     void    *wall_img;
     void    *floor_img;
-    void    *player_img;
+    void    *p_right;
+    void    *p_left;
     void    *exit_img;
     void    *coin_img;
 
@@ -105,6 +102,6 @@ void    move_up(t_game *game);
 void    move_down(t_game *game);
 void	try_move(t_game *game, size_t new_y, size_t new_x);
 
-int    close_game(void *game);
+void    close_game(t_game *game);
 void	win_game(t_game *game);
 #endif

@@ -6,7 +6,7 @@
 /*   By: anashwan <anashwan@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/26 19:08:17 by anashwan          #+#    #+#             */
-/*   Updated: 2026/01/08 22:58:33 by anashwan         ###   ########.fr       */
+/*   Updated: 2026/01/09 01:57:33 by anashwan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ void	find_player_exit(t_game *game)
 		{
 			if (game->map[i][j] == 'P')
 			{
-				game->pos_x = i;
-				game->pos_y = j;
+				game->pos_x = j;
+				game->pos_y = i;
 			}
 			if (game->map[i][j] == 'E')
 			{
