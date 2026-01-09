@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "../so_long.h"
+# include "so_long.h"
 
 int is_valid_path(char **map, size_t width, size_t height)
 {

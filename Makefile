@@ -1,6 +1,6 @@
 CC = cc
 
-CFLAGS = -g -Wall -Werror -Wextra 
+CFLAGS = -g -Wall -Werror -Wextra -Imlx -I/usr/include -Iinc -Ilib/libft -Ilib/gnl -Ilib/ft_printf -O3
 
 NAME = so_long
 
@@ -13,14 +13,14 @@ SRC = 	./src/main.c \
 		./src/map/path_checks.c \
 		./src/map/tiles_checks.c \
 		./src/map/get_map.c \
-		./get_next_line/get_next_line.c \
-		./get_next_line/get_next_line_utils.c \
+		./lib/gnl/get_next_line.c \
+		./lib/gnl/get_next_line_utils.c
 
 OBJ = $(SRC:.c=.o)
 
-LIBFT =	./libft/libft.a
+LIBFT =	./lib/libft/libft.a
 
-FT_PRINTF = ./ft_printf/libftprintf.a
+FT_PRINTF = ./lib/ft_printf/libftprintf.a
 
 MLX = -L./mlx -lmlx -lXext -lX11 -lm -lz
 
@@ -36,22 +36,22 @@ $(NAME): $(OBJ) $(LIB)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 $(LIBFT):
-	$(MAKE) -C libft
+	$(MAKE) -C lib/libft
 
 $(FT_PRINTF):
-	$(MAKE) -C ft_printf
+	$(MAKE) -C lib/ft_printf
 
 $(MLX):
-	$(MAKE) -C mlx CC="gcc -std=gnu99 -Wno-implicit-function-declaration"
+	$(MAKE) -C mlx
 
 clean:
-	$(MAKE) -C libft clean
-	$(MAKE) -C ft_printf clean
+	$(MAKE) -C lib/libft clean
+	$(MAKE) -C lib/ft_printf clean
 	rm -f $(OBJ)
 
 fclean: clean
-	$(MAKE) -C libft fclean
-	$(MAKE) -C ft_printf fclean
+	$(MAKE) -C lib/libft fclean
+	$(MAKE) -C lib/ft_printf fclean
 	rm -f $(NAME)
 
 re: fclean all

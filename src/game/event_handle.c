@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../so_long.h"
+# include "so_long.h"
 
 void	try_move(t_game *game, size_t new_y, size_t new_x)
 {

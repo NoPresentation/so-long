@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "../so_long.h"
+# include "so_long.h"
 
 bool correct_len(char *line, size_t len)
 {

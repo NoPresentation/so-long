@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../so_long.h"
+# include "so_long.h"
 
 int	init_mlx(t_game *game)
 {
@@ -30,27 +30,27 @@ int	load_images(t_game *game)
 	int	h;
 
 	game->wall_img = mlx_xpm_file_to_image(game->mlx,
-			"/home/ahmad_nashwan/core/so_long/imgs/border.xpm", &w, &h);
+			"./imgs/border.xpm", &w, &h);
 	if (!game->wall_img)
 		return (0);
 	game->floor_img = mlx_xpm_file_to_image(game->mlx,
-			"/home/ahmad_nashwan/core/so_long/imgs/green.xpm", &w, &h);
+			"./imgs/green.xpm", &w, &h);
 	if (!game->floor_img)
 		return (0);
 	game->p_right = mlx_xpm_file_to_image(game->mlx,
-			"/home/ahmad_nashwan/core/so_long/imgs/bird_right.xpm", &w, &h);
+			"./imgs/bird_right.xpm", &w, &h);
 	if (!game->p_right)
 		return (0);
 	game->p_left = mlx_xpm_file_to_image(game->mlx,
-			"/home/ahmad_nashwan/core/so_long/imgs/bird_left.xpm", &w, &h);
+			"./imgs/bird_left.xpm", &w, &h);
 	if (!game->p_left)
 		return (0);
 	game->coin_img = mlx_xpm_file_to_image(game->mlx,
-			"/home/ahmad_nashwan/core/so_long/imgs/apple.xpm", &w, &h);
+			"./imgs/apple.xpm", &w, &h);
 	if (!game->coin_img)
 		return (0);
 	game->exit_img = mlx_xpm_file_to_image(game->mlx,
-			"/home/ahmad_nashwan/core/so_long/imgs/escape.xpm", &w, &h);
+			"./imgs/escape.xpm", &w, &h);
 	if (!game->exit_img)
 		return (0);
 	return (1);

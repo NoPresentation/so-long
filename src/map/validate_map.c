@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../so_long.h"
+# include "so_long.h"
 
 void	find_player_exit(t_game *game)
 {
