@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   validate_map.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anashwan <anashwan@student.42amman.com>    +#+  +:+       +#+        */
+/*   By: anashwan <anashwan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/26 19:08:17 by anashwan          #+#    #+#             */
-/*   Updated: 2026/01/09 01:57:33 by anashwan         ###   ########.fr       */
+/*   Updated: 2026/01/10 18:33:00 by anashwan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "so_long.h"
+#include "so_long.h"
 
 void	find_player_exit(t_game *game)
 {
@@ -39,34 +39,41 @@ void	find_player_exit(t_game *game)
 	}
 }
 
-int	validate_map(t_game *game)
+int check_structure(t_game *game)
 {
 	if (!check_rectangle(game))
 	{
-		ft_putstr_fd("NOT RECT\n", 2);
+		ft_putstr_fd("Error\nMap not a rectangle.\n", 2);
 		return (0);
 	}
-    if (!check_walls(game))
+	if (!check_walls(game))
 	{
+		ft_putstr_fd("Error\nInvalid map structure.\n", 2);
 		return (0);
-		ft_putstr_fd("WALLS WRONG\n", 2);
 	}
 	if (!check_chars(game))
 	{
-		ft_putstr_fd("MISSING ELEMENTS\n", 2);
+		ft_putstr_fd("Error\nFound invalid character.", 2);
 		return (0);
 	}
 	if (!check_components(game))
 	{
-		ft_putstr_fd("BAD MAP", 2);
+		ft_putstr_fd("Error\nExtra or missing characters.", 2);
 		return (0);
 	}
+	return (1);
+}
+
+int	validate_map(t_game *game)
+{
+	if (!check_structure(game))
+		return (0);
 	find_player_exit(game);
 	if (!check_path(game))
 	{
-		ft_putstr_fd("NO PATH\n", 2);
+		ft_putstr_fd("Error\nMap has no valid path.\n", 2);
 		return (0);
 	}
 	game->map[game->exit_y][game->exit_x] = '0';
-    return (1);
+	return (1);
 }

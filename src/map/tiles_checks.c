@@ -10,8 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "so_long.h"
-
+#include "so_long.h"
 
 int	check_rectangle(t_game *game)
 {
@@ -71,7 +70,6 @@ int	count_occurance(const char *s, char c)
 	return (count);
 }
 
-
 int	check_components(t_game *game)
 {
 	int	i;
@@ -96,26 +94,25 @@ int	check_components(t_game *game)
 	return (1);
 }
 
-int check_chars(t_game *game)
+int	check_chars(t_game *game)
 {
-    size_t	i;
-    size_t	j;
-    char	**map;
+	size_t	i;
+	size_t	j;
+	char	**map;
 
-    i = 0;
-    map = game->map;
-    while (i < game->height)
-    {
-        j = 0;
-        while (j < game->width)
-        {
-            if (map[i][j] != '1' && map[i][j] != '0' &&
-                map[i][j] != 'P' && map[i][j] != 'E' &&
-                map[i][j] != 'C' )
-                return (0);
-            j++;
-        }
-        i++;
-    }
-    return (1);
+	i = 0;
+	map = game->map;
+	while (i < game->height)
+	{
+		j = 0;
+		while (j < game->width)
+		{
+			if (map[i][j] != '1' && map[i][j] != '0' && map[i][j] != 'P'
+				&& map[i][j] != 'E' && map[i][j] != 'C')
+				return (0);
+			j++;
+		}
+		i++;
+	}
+	return (1);
 }

@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "so_long.h"
+#include "so_long.h"
 
 int	init_mlx(t_game *game)
 {
@@ -29,28 +29,28 @@ int	load_images(t_game *game)
 	int	w;
 	int	h;
 
-	game->wall_img = mlx_xpm_file_to_image(game->mlx,
-			"./imgs/border.xpm", &w, &h);
+	game->wall_img = mlx_xpm_file_to_image(game->mlx, "./imgs/border.xpm", &w,
+			&h);
 	if (!game->wall_img)
 		return (0);
-	game->floor_img = mlx_xpm_file_to_image(game->mlx,
-			"./imgs/green.xpm", &w, &h);
+	game->floor_img = mlx_xpm_file_to_image(game->mlx, "./imgs/green.xpm", &w,
+			&h);
 	if (!game->floor_img)
 		return (0);
-	game->p_right = mlx_xpm_file_to_image(game->mlx,
-			"./imgs/bird_right.xpm", &w, &h);
+	game->p_right = mlx_xpm_file_to_image(game->mlx, "./imgs/bird_right.xpm",
+			&w, &h);
 	if (!game->p_right)
 		return (0);
-	game->p_left = mlx_xpm_file_to_image(game->mlx,
-			"./imgs/bird_left.xpm", &w, &h);
+	game->p_left = mlx_xpm_file_to_image(game->mlx, "./imgs/bird_left.xpm", &w,
+			&h);
 	if (!game->p_left)
 		return (0);
-	game->coin_img = mlx_xpm_file_to_image(game->mlx,
-			"./imgs/apple.xpm", &w, &h);
+	game->coin_img = mlx_xpm_file_to_image(game->mlx, "./imgs/apple.xpm", &w,
+			&h);
 	if (!game->coin_img)
 		return (0);
-	game->exit_img = mlx_xpm_file_to_image(game->mlx,
-			"./imgs/escape.xpm", &w, &h);
+	game->exit_img = mlx_xpm_file_to_image(game->mlx, "./imgs/escape.xpm", &w,
+			&h);
 	if (!game->exit_img)
 		return (0);
 	return (1);

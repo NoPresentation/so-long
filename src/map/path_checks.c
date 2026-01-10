@@ -10,28 +10,28 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "so_long.h"
+#include "so_long.h"
 
-int is_valid_path(char **map, size_t width, size_t height)
+int	is_valid_path(char **map, size_t width, size_t height)
 {
-    size_t	i;
-    size_t	j;
-    
-    i = 0;
-    while (i < height)
-    {
-        j = 0;
-        while (j < width)
-        {
-            if (map[i][j] == 'C' || map[i][j] == 'E')
-            {
-                return (0);
-            }
-            j++;
-        }
-        i++;
-    }
-    return (1);
+	size_t	i;
+	size_t	j;
+
+	i = 0;
+	while (i < height)
+	{
+		j = 0;
+		while (j < width)
+		{
+			if (map[i][j] == 'C' || map[i][j] == 'E')
+			{
+				return (0);
+			}
+			j++;
+		}
+		i++;
+	}
+	return (1);
 }
 
 void	flood_fill(char **map, size_t width, size_t height, size_t x, size_t y)
@@ -76,13 +76,7 @@ int	check_path(t_game *game)
 	map_copy = copy_map(game);
 	if (!map_copy)
 		return (0);
-	flood_fill(
-		map_copy,
-		game->width,
-		game->height,
-		game->pos_x,
-		game->pos_x
-	);
+	flood_fill(map_copy, game->width, game->height, game->pos_x, game->pos_x);
 	if (!is_valid_path(map_copy, game->width, game->height))
 	{
 		free_split(map_copy, game->height);

@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   moves.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anashwan <anashwan@student.42amman.com>    +#+  +:+       +#+        */
+/*   By: anashwan <anashwan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/08 20:46:59 by anashwan          #+#    #+#             */
-/*   Updated: 2026/01/08 20:47:14 by anashwan         ###   ########.fr       */
+/*   Updated: 2026/01/10 17:17:58 by anashwan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "so_long.h"
+#include "so_long.h"
 
 void	move_up(t_game *game)
 {

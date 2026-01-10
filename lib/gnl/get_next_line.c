@@ -12,10 +12,11 @@
 
 #include "get_next_line.h"
 
-static void	*polish_list(t_gnl_list **list, t_gnl_list *node, size_t index, int eof)
+static void	*polish_list(t_gnl_list **list, t_gnl_list *node, size_t index,
+		int eof)
 {
-	char	*last_string;
-	size_t	i;
+	char		*last_string;
+	size_t		i;
 	t_gnl_list	*last_node;
 
 	i = 0;
@@ -41,9 +42,9 @@ static void	*polish_list(t_gnl_list **list, t_gnl_list *node, size_t index, int 
 
 static char	*get_line_from_node(t_gnl_list **list, int eof)
 {
-	char	*line;
-	size_t	j;
-	size_t	index;
+	char		*line;
+	size_t		j;
+	size_t		index;
 	t_gnl_list	*node;
 
 	line = malloc(gnl_line_len(list) + 1);
@@ -70,7 +71,7 @@ static char	*get_line_from_node(t_gnl_list **list, int eof)
 
 static int	process_line(char *buffer, t_gnl_list **list)
 {
-	ssize_t	i;
+	ssize_t		i;
 	t_gnl_list	*new_node;
 
 	i = 0;
@@ -124,8 +125,8 @@ char	*get_next_line(int fd)
 {
 	static t_gnl_list	*list;
 	t_gnl_list			*node;
-	int				i;
-	char			*line;
+	int					i;
+	char				*line;
 
 	node = list;
 	if (BUFFER_SIZE < 0 || fd < 0)

@@ -32,8 +32,8 @@ void	gnl_lstadd_back(t_gnl_list **lst, t_gnl_list *new)
 t_gnl_list	*gnl_lstnew(char *content)
 {
 	t_gnl_list	*element;
-	int		i;
-	char	*string;
+	int			i;
+	char		*string;
 
 	if (!content)
 		return (NULL);
@@ -96,8 +96,8 @@ size_t	gnl_strlcpy(char *dest, const char *src, size_t size)
 size_t	gnl_line_len(t_gnl_list **list)
 {
 	t_gnl_list	*node;
-	size_t	i;
-	size_t	len;
+	size_t		i;
+	size_t		len;
 
 	if (!list || !*list)
 		return (0);

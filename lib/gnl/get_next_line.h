@@ -29,7 +29,7 @@ typedef struct gnl_list
 char				*get_next_line(int fd);
 
 void				gnl_lstadd_back(t_gnl_list **lst, t_gnl_list *new);
-t_gnl_list				*gnl_lstnew(char *content);
+t_gnl_list			*gnl_lstnew(char *content);
 void				*gnl_lstclear(t_gnl_list **lst, void (*del)(void *),
 						char *buffer);
 size_t				gnl_strlcpy(char *dest, const char *src, size_t size);

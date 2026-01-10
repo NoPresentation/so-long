@@ -3,14 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   game_ctl.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anashwan <anashwan@student.42amman.com>    +#+  +:+       +#+        */
+/*   By: anashwan <anashwan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/02 00:52:21 by anashwan          #+#    #+#             */
-/*   Updated: 2026/01/09 03:26:38 by anashwan         ###   ########.fr       */
+/*   Updated: 2026/01/10 17:33:51 by anashwan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "so_long.h"
+#include "so_long.h"
+
+void	init_imgs(t_game *game)
+{
+	game->floor_img = NULL;
+	game->coin_img = NULL;
+	game->wall_img = NULL;
+	game->exit_img = NULL;
+	game->p_right = NULL;
+	game->p_left = NULL;
+}
 
 t_game	*create_game(char **map)
 {
@@ -32,13 +42,8 @@ t_game	*create_game(char **map)
 	game->exit_x = 0;
 	game->coins = 0;
 	game->moves = 0;
-	game->floor_img = NULL;
-	game->coin_img = NULL;
-	game->wall_img = NULL;
-	game->exit_img = NULL;
-	game->p_right = NULL;
-	game->p_left = NULL;
 	game->dir = 1;
+	init_imgs(game);
 	return (game);
 }
 
@@ -48,7 +53,7 @@ void	win_game(t_game *game)
 	close_game(game);
 }
 
-void	close_game(t_game	*game)
+void	close_game(t_game *game)
 {
 	if (!game)
 		return ;
@@ -69,8 +74,11 @@ void	close_game(t_game	*game)
 	if (game->map)
 		free_split(game->map, game->height);
 	if (game->mlx)
+	{
+		mlx_destroy_display(game->mlx);
 		free(game->mlx);
+	}
 	if (game)
 		free(game);
-	exit(0); // look this up
+	exit(0);
 }

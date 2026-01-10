@@ -22,37 +22,43 @@ LIBFT =	./lib/libft/libft.a
 
 FT_PRINTF = ./lib/ft_printf/libftprintf.a
 
-MLX = -L./mlx -lmlx -lXext -lX11 -lm -lz
+MLX_LIB = mlx/libmlx.a
+MLX_FLAGS = -Lmlx -lmlx -lXext -lX11 -lm -lz
 
-LIB = $(LIBFT) $(FT_PRINTF) $(MLX)
-
+LIB = $(LIBFT) $(FT_PRINTF) $(MLX_LIB)
 
 all: $(NAME)
 
 $(NAME): $(OBJ) $(LIB)
-	$(CC) $(CFLAGS) $(OBJ) $(LIB) -o $@
+	@echo "Building game..."
+	@$(CC) $(CFLAGS) $(OBJ) $(MLX_FLAGS) $(LIB) -o $@
+	@echo "Done, to play: ./so_long <path_to_map>"
 
 %.o: %.c
-	$(CC) $(CFLAGS) -c $< -o $@
+	@echo "Compiling src code..."
+	@$(CC) $(CFLAGS) -c $< -o $@
 
 $(LIBFT):
-	$(MAKE) -C lib/libft
+	@$(MAKE) -C lib/libft
 
 $(FT_PRINTF):
-	$(MAKE) -C lib/ft_printf
+	@$(MAKE) -C lib/ft_printf
 
-$(MLX):
-	$(MAKE) -C mlx
+$(MLX_LIB):
+	@echo "Compiling MLX..."
+	@$(MAKE) -C mlx
 
 clean:
-	$(MAKE) -C lib/libft clean
-	$(MAKE) -C lib/ft_printf clean
-	rm -f $(OBJ)
+	@echo "Removed object files."
+	@$(MAKE) -C lib/libft clean
+	@$(MAKE) -C lib/ft_printf clean
+	@rm -f $(OBJ)
 
 fclean: clean
-	$(MAKE) -C lib/libft fclean
-	$(MAKE) -C lib/ft_printf fclean
-	rm -f $(NAME)
+	@echo "Removed Excutable."
+	@$(MAKE) -C lib/libft fclean
+	@$(MAKE) -C lib/ft_printf fclean
+	@rm -f $(NAME)
 
 re: fclean all
 

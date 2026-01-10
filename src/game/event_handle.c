@@ -3,17 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   event_handle.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anashwan <anashwan@student.42amman.com>    +#+  +:+       +#+        */
+/*   By: anashwan <anashwan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/08 16:33:15 by anashwan          #+#    #+#             */
-/*   Updated: 2026/01/09 03:20:07 by anashwan         ###   ########.fr       */
+/*   Updated: 2026/01/10 20:10:06 by anashwan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "so_long.h"
+#include "so_long.h"
 
 void	try_move(t_game *game, size_t new_y, size_t new_x)
 {
+	bool won = false;
 	if (game->map[new_y][new_x] == 'C')
 		game->coins -= 1;
 	if (game->map[new_y][new_x] == 'E' && game->coins == 0)
@@ -35,7 +36,9 @@ void	try_move(t_game *game, size_t new_y, size_t new_x)
 
 int	handle_key(int key_code, void *ptr)
 {
-	t_game *game = (t_game *)ptr;
+	t_game	*game;
+
+	game = (t_game *)ptr;
 	if (key_code == W || key_code == UP)
 		move_up(game);
 	else if (key_code == S || key_code == DOWN)
