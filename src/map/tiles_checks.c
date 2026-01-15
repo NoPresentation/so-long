@@ -6,7 +6,7 @@
 /*   By: anashwan <anashwan@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/02 00:49:44 by anashwan          #+#    #+#             */
-/*   Updated: 2026/01/08 17:12:46 by anashwan         ###   ########.fr       */
+/*   Updated: 2026/01/15 20:25:35 by anashwan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,21 @@ int	check_rectangle(t_game *game)
 {
 	size_t	width;
 	size_t	i;
+	int		flag;
 
+	flag = true;
 	width = ft_strlen(game->map[0]);
 	i = 1;
 	while (game->map[i])
 	{
 		if (ft_strlen(game->map[i]) != width)
-			return (0);
+			flag = 0;
 		i++;
+	}
+	if (!flag)
+	{
+		free_map(game->map);
+		return (0);
 	}
 	game->height = i;
 	game->width = width;

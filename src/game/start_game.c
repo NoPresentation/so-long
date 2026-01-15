@@ -6,7 +6,7 @@
 /*   By: anashwan <anashwan@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/03 22:34:41 by anashwan          #+#    #+#             */
-/*   Updated: 2026/01/09 02:59:09 by anashwan         ###   ########.fr       */
+/*   Updated: 2026/01/15 20:26:06 by anashwan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,20 +37,17 @@ int	load_images(t_game *game)
 			&h);
 	if (!game->floor_img)
 		return (0);
-	game->p_right = mlx_xpm_file_to_image(game->mlx, "./imgs/bird_right.xpm",
-			&w, &h);
-	if (!game->p_right)
+	game->pr = mlx_xpm_file_to_image(game->mlx, "./imgs/bird_right.xpm", &w, &h);
+	if (!game->pr)
 		return (0);
-	game->p_left = mlx_xpm_file_to_image(game->mlx, "./imgs/bird_left.xpm", &w,
-			&h);
-	if (!game->p_left)
+	game->pl = mlx_xpm_file_to_image(game->mlx, "./imgs/bird_left.xpm", &w,&h);
+	if (!game->pl)
 		return (0);
 	game->coin_img = mlx_xpm_file_to_image(game->mlx, "./imgs/apple.xpm", &w,
 			&h);
 	if (!game->coin_img)
 		return (0);
-	game->exit_img = mlx_xpm_file_to_image(game->mlx, "./imgs/escape.xpm", &w,
-			&h);
+	game->exit_img = mlx_xpm_file_to_image(game->mlx, "./imgs/escape.xpm", &w,&h);
 	if (!game->exit_img)
 		return (0);
 	return (1);
@@ -62,9 +59,9 @@ void	fill_pixel(t_game *game, char tile, size_t x, size_t y)
 	if (tile == '1')
 		mlx_put_image_to_window(game->mlx, game->win, game->wall_img, x, y);
 	else if (tile == 'P' && game->dir == 1)
-		mlx_put_image_to_window(game->mlx, game->win, game->p_right, x, y);
+		mlx_put_image_to_window(game->mlx, game->win, game->pr, x, y);
 	else if (tile == 'P' && game->dir == 0)
-		mlx_put_image_to_window(game->mlx, game->win, game->p_left, x, y);
+		mlx_put_image_to_window(game->mlx, game->win, game->pl, x, y);
 	else if (tile == 'C')
 		mlx_put_image_to_window(game->mlx, game->win, game->coin_img, x, y);
 	else if (tile == 'E' && game->coins == 0)
@@ -108,7 +105,7 @@ void	start_game(t_game *game)
 		close_game(game);
 	}
 	render_map(game);
-	mlx_hook(game->win, 2, 1L << 0, (int (*)(void))(void *)handle_key, game);
-	mlx_hook(game->win, 17, 0, (int (*)(void))(void *)close_game, game);
+	mlx_hook(game->win, 2, 1L << 0, handle_key, game);
+	mlx_hook(game->win, 17, 0, close_game, game);
 	mlx_loop(game->mlx);
 }

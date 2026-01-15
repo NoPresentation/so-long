@@ -6,7 +6,7 @@
 /*   By: anashwan <anashwan@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/02 01:13:43 by anashwan          #+#    #+#             */
-/*   Updated: 2026/01/08 21:55:10 by anashwan         ###   ########.fr       */
+/*   Updated: 2026/01/15 20:25:26 by anashwan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,13 @@ int	is_valid_path(char **map, size_t width, size_t height)
 {
 	size_t	i;
 	size_t	j;
-
+ (void)width;
+ (void)height;
 	i = 0;
-	while (i < height)
+	while (map[i] /*i < height*/)
 	{
 		j = 0;
-		while (j < width)
+		while (map[i][j] /*j < width*/)
 		{
 			if (map[i][j] == 'C' || map[i][j] == 'E')
 			{
@@ -61,7 +62,7 @@ char	**copy_map(t_game *game)
 		map_copy[i] = ft_strdup(game->map[i]);
 		if (!map_copy[i])
 		{
-			free_split(map_copy, i);
+			free_map(map_copy);
 			return (NULL);
 		}
 		i++;
@@ -77,11 +78,17 @@ int	check_path(t_game *game)
 	if (!map_copy)
 		return (0);
 	flood_fill(map_copy, game->width, game->height, game->pos_x, game->pos_x);
+	int x = 0;
+	while (map_copy[x])
+	{
+		ft_printf("%s", map_copy[x]);
+		x++;
+	}
 	if (!is_valid_path(map_copy, game->width, game->height))
 	{
-		free_split(map_copy, game->height);
+		free_map(map_copy);
 		return (0);
 	}
-	free_split(map_copy, game->height);
+	free_map(map_copy);
 	return (1);
 }

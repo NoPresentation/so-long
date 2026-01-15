@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anashwan <anashwan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: anashwan <anashwan@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/26 19:08:08 by anashwan          #+#    #+#             */
-/*   Updated: 2026/01/10 18:27:38 by anashwan         ###   ########.fr       */
+/*   Updated: 2026/01/15 20:39:51 by anashwan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,8 @@ typedef struct s_game
 	/* Images */
 	void	*wall_img;
 	void	*floor_img;
-	void	*p_right;
-	void	*p_left;
+	void	*pr;
+	void	*pl;
 	void	*exit_img;
 	void	*coin_img;
 
@@ -80,7 +80,7 @@ int			check_chars(t_game *game);
 
 // Get map
 char		**get_map(int fd);
-void		*free_split(char **list, int elements);
+void		*free_map(char **map);
 char		*read_map(int fd);
 
 // Game Start
@@ -93,7 +93,7 @@ void		flood_fill(char **map, size_t width, size_t height, size_t x,
 				size_t y);
 
 // Movement and Events
-int			handle_key(int key_code, void *ptr);
+void		handle_key(int key_code, t_game *game);
 void		move_left(t_game *game);
 void		move_right(t_game *game);
 void		move_up(t_game *game);

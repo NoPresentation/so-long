@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game_ctl.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anashwan <anashwan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: anashwan <anashwan@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/02 00:52:21 by anashwan          #+#    #+#             */
-/*   Updated: 2026/01/10 17:33:51 by anashwan         ###   ########.fr       */
+/*   Updated: 2026/01/15 20:22:02 by anashwan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,24 @@ void	init_imgs(t_game *game)
 	game->coin_img = NULL;
 	game->wall_img = NULL;
 	game->exit_img = NULL;
-	game->p_right = NULL;
-	game->p_left = NULL;
+	game->pl = NULL;
+	game->pr = NULL;
+}
+
+void	free_images(t_game *game)
+{
+	if (game->pr)
+		mlx_destroy_image(game->mlx, game->pr);
+	if (game->pl)
+		mlx_destroy_image(game->mlx, game->pl);
+	if (game->floor_img)
+		mlx_destroy_image(game->mlx, game->floor_img);
+	if (game->wall_img)
+		mlx_destroy_image(game->mlx, game->wall_img);
+	if (game->coin_img)
+		mlx_destroy_image(game->mlx, game->coin_img);
+	if (game->exit_img)
+		mlx_destroy_image(game->mlx, game->exit_img);
 }
 
 t_game	*create_game(char **map)
@@ -57,22 +73,11 @@ void	close_game(t_game *game)
 {
 	if (!game)
 		return ;
-	if (game->p_right)
-		mlx_destroy_image(game->mlx, game->p_right);
-	if (game->p_left)
-		mlx_destroy_image(game->mlx, game->p_left);
-	if (game->floor_img)
-		mlx_destroy_image(game->mlx, game->floor_img);
-	if (game->wall_img)
-		mlx_destroy_image(game->mlx, game->wall_img);
-	if (game->coin_img)
-		mlx_destroy_image(game->mlx, game->coin_img);
-	if (game->exit_img)
-		mlx_destroy_image(game->mlx, game->exit_img);
 	if (game->win)
 		mlx_destroy_window(game->mlx, game->win);
 	if (game->map)
-		free_split(game->map, game->height);
+		free_map(game->map);
+	free_images(game);
 	if (game->mlx)
 	{
 		mlx_destroy_display(game->mlx);

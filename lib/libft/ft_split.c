@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anashwan <anashwan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: anashwan <anashwan@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/26 18:14:48 by anashwan          #+#    #+#             */
-/*   Updated: 2025/09/10 19:59:15 by anashwan         ###   ########.fr       */
+/*   Updated: 2026/01/15 20:20:13 by anashwan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,9 +76,9 @@ static char	*create_string(const char *s, char c)
 	return (str);
 }
 
-static void	*free_split(char **list, int elements)
+static	void *free_split(char **list, int elements)
 {
-	int	i;
+	int i;
 
 	i = 0;
 	while (i < elements)
@@ -109,7 +109,7 @@ char	**ft_split(char const *s, char c)
 		{
 			list[l++] = create_string(s, c);
 			if (!list[l - 1])
-				return (free_split(list, l));
+				return (free_map(list, l));
 			while (*s && *s != c)
 				s++;
 		}

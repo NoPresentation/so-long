@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_map.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anashwan <anashwan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: anashwan <anashwan@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/08 20:49:15 by anashwan          #+#    #+#             */
-/*   Updated: 2026/01/10 17:49:04 by anashwan         ###   ########.fr       */
+/*   Updated: 2026/01/15 20:17:14 by anashwan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,20 +29,20 @@ char	*read_map(int fd)
 	char	*line;
 	char	*reader;
 	char	*temp;
-	size_t	len;
+	//size_t	len;
 
 	reader = ft_strdup("");
 	line = get_next_line(fd);
-	len = ft_strlen(line) - 1;
+	//len = ft_strlen(line) - 1;
 	while (line)
 	{
-		if (!correct_len(line, len))
-		{
-			free(reader);
-			free(line);
-			ft_putstr_fd("Error\nLines are not the same length.\n", 2);
-			return (NULL);
-		}
+		// if (!correct_len(line, len))
+		// {
+		// 	free(reader);
+		// 	free(line);
+		// 	ft_putstr_fd("Error\nLines are not the same length.\n", 2);
+		// 	return (NULL);
+		// }
 		temp = reader;
 		reader = ft_strjoin(reader, line);
 		free(line);
@@ -53,18 +53,19 @@ char	*read_map(int fd)
 	return (reader);
 }
 
-void	*free_split(char **list, int elements)
+void    free_map(char **list)
 {
-	int	i;
+    int i;
 
-	i = 0;
-	while (i < elements)
-	{
-		free(list[i]);
-		i++;
-	}
-	free(list);
-	return (NULL);
+    if (!list)
+        return;
+    i = 0;
+    while (list[i])
+    {
+        free(list[i]);
+        i++;
+    }
+    free(list);
 }
 
 char	**get_map(int fd)
