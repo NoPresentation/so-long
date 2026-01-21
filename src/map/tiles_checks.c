@@ -16,21 +16,17 @@ int	check_rectangle(t_game *game)
 {
 	size_t	width;
 	size_t	i;
-	int		flag;
 
-	flag = true;
 	width = ft_strlen(game->map[0]);
 	i = 1;
 	while (game->map[i])
 	{
 		if (ft_strlen(game->map[i]) != width)
-			flag = 0;
+		{
+			ft_putstr_fd("Error\nMap not a rectangle.\n", 2);
+			return (0);
+		}
 		i++;
-	}
-	if (!flag)
-	{
-		free_map(game->map);
-		return (0);
 	}
 	game->height = i;
 	game->width = width;
@@ -47,13 +43,19 @@ int	check_walls(t_game *game)
 	while (j < game->width)
 	{
 		if (game->map[0][j] != '1' || game->map[game->height - 1][j] != '1')
+		{
+			ft_putstr_fd("Error\nMap not surrounded by walls.\n", 2);
 			return (0);
+		}
 		j++;
 	}
 	while (i < game->height)
 	{
 		if (game->map[i][0] != '1' || game->map[i][game->width - 1] != '1')
+		{
+			ft_putstr_fd("Error\nMap not surrounded by walls.\n", 2);
 			return (0);
+		}
 		i++;
 	}
 	return (1);
@@ -95,6 +97,10 @@ int	check_components(t_game *game)
 		c += count_occurance(game->map[i], 'C');
 		i++;
 	}
+	if (c < 1)
+		ft_putstr_fd("Error\nMap must have at least one collectable.\n", 2);
+	else if (p != 1 || e != 1)
+		ft_putstr_fd("Error\nMap must have one player and one exit ONLY!\n", 2);
 	if (p != 1 || e != 1 || c < 1)
 		return (0);
 	game->coins = c;
@@ -115,8 +121,11 @@ int	check_chars(t_game *game)
 		while (j < game->width)
 		{
 			if (map[i][j] != '1' && map[i][j] != '0' && map[i][j] != 'P'
-				&& map[i][j] != 'E' && map[i][j] != 'C')
+					&& map[i][j] != 'E' && map[i][j] != 'C')
+			{
+				ft_putstr_fd("Error\nFound invalid character.\n", 2);
 				return (0);
+			}
 			j++;
 		}
 		i++;

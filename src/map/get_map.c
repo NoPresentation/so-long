@@ -20,7 +20,10 @@ bool	correct_len(char *line, size_t len)
 	if (line[line_len - 1] == '\n')
 		line_len--;
 	if (line_len != len)
+	{
+		ft_putstr_fd("Error\nLines are not the same length.\n", 2);
 		return (false);
+	}
 	return (true);
 }
 
@@ -29,22 +32,21 @@ char	*read_map(int fd)
 	char	*line;
 	char	*reader;
 	char	*temp;
-	//size_t	len;
 
 	reader = ft_strdup("");
+	if (!reader)
+		return (NULL);
 	line = get_next_line(fd);
-	//len = ft_strlen(line) - 1;
 	while (line)
 	{
-		// if (!correct_len(line, len))
-		// {
-		// 	free(reader);
-		// 	free(line);
-		// 	ft_putstr_fd("Error\nLines are not the same length.\n", 2);
-		// 	return (NULL);
-		// }
 		temp = reader;
 		reader = ft_strjoin(reader, line);
+		if (!reader)
+		{
+			free(line);
+			free(temp);
+			return (NULL);
+		}
 		free(line);
 		free(temp);
 		line = get_next_line(fd);
@@ -53,19 +55,19 @@ char	*read_map(int fd)
 	return (reader);
 }
 
-void    free_map(char **list)
+void    free_map(char **map)
 {
     int i;
 
-    if (!list)
-        return;
-    i = 0;
-    while (list[i])
-    {
-        free(list[i]);
-        i++;
-    }
-    free(list);
+	i = 0;
+	if (!map)
+		return ;
+	while (map[i])
+	{
+		free(map[i]);
+		i++;
+	}
+	free(map);
 }
 
 char	**get_map(int fd)
@@ -89,6 +91,7 @@ char	**get_map(int fd)
 	if (!map || map[0] == NULL)
 	{
 		ft_putstr_fd("Error\nEmpty or non-existing map.\n", 2);
+		free_map(map);
 		return (NULL);
 	}
 	close(fd);

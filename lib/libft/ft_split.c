@@ -109,7 +109,7 @@ char	**ft_split(char const *s, char c)
 		{
 			list[l++] = create_string(s, c);
 			if (!list[l - 1])
-				return (free_map(list, l));
+				return (free_split(list, l));
 			while (*s && *s != c)
 				s++;
 		}

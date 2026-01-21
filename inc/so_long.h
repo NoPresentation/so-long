@@ -48,6 +48,7 @@ typedef struct s_game
 	size_t	pos_y;
 	size_t	exit_x;
 	size_t	exit_y;
+	int		exit_flag;
 	int		dir;
 
 	/* MLX core */
@@ -68,7 +69,6 @@ typedef struct s_game
 
 // Checks
 int			validate_map(t_game *game);
-int			check_structure(t_game *game);
 int			check_rectangle(t_game *game);
 int			check_walls(t_game *game);
 int			is_valid_path(char **map, size_t width, size_t height);
@@ -80,7 +80,7 @@ int			check_chars(t_game *game);
 
 // Get map
 char		**get_map(int fd);
-void		*free_map(char **map);
+void		free_map(char **map);
 char		*read_map(int fd);
 
 // Game Start
@@ -89,11 +89,10 @@ void		start_game(t_game *game);
 int			init_mlx(t_game *game);
 int			load_images(t_game *game);
 void		render_map(t_game *game);
-void		flood_fill(char **map, size_t width, size_t height, size_t x,
-				size_t y);
+void		flood_fill(char **map,t_game *game, size_t x, size_t y);
 
 // Movement and Events
-void		handle_key(int key_code, t_game *game);
+int			handle_key(int key_code, t_game *game);
 void		move_left(t_game *game);
 void		move_right(t_game *game);
 void		move_up(t_game *game);
@@ -101,6 +100,6 @@ void		move_down(t_game *game);
 void		try_move(t_game *game, size_t new_y, size_t new_x);
 
 // Game end
-void		close_game(t_game *game);
+int		close_game(t_game *game);
 void		win_game(t_game *game);
 #endif

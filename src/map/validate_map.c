@@ -39,41 +39,20 @@ void	find_player_exit(t_game *game)
 	}
 }
 
-int check_structure(t_game *game)
-{
-	if (!check_rectangle(game))
-	{
-		ft_putstr_fd("Error\nMap not a rectangle.\n", 2);
-		return (0);
-	}
-	if (!check_walls(game))
-	{
-		ft_putstr_fd("Error\nInvalid map structure.\n", 2);
-		return (0);
-	}
-	if (!check_chars(game))
-	{
-		ft_putstr_fd("Error\nFound invalid character.", 2);
-		return (0);
-	}
-	if (!check_components(game))
-	{
-		ft_putstr_fd("Error\nExtra or missing characters.", 2);
-		return (0);
-	}
-	return (1);
-}
-
 int	validate_map(t_game *game)
 {
-	if (!check_structure(game))
+	if (!check_rectangle(game))
+		return (0);
+	if (!check_walls(game))
+		return (0);
+	if (!check_chars(game))
+		return (0);
+	if (!check_components(game))
 		return (0);
 	find_player_exit(game);
 	if (!check_path(game))
-	{
-		ft_putstr_fd("Error\nMap has no valid path.\n", 2);
 		return (0);
-	}
-	game->map[game->exit_y][game->exit_x] = '0';
+	// We hide the exit until the player collects all collectables.
+	game->map[game->exit_y][game->exit_x] = '0'; 
 	return (1);
 }

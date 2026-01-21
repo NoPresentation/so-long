@@ -1,4 +1,4 @@
-CC = cc
+CC = gcc
 
 CFLAGS = -g -Wall -Werror -Wextra -Imlx -I/usr/include -Iinc -Ilib/libft -Ilib/gnl -Ilib/ft_printf -O3
 

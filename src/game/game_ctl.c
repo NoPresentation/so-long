@@ -44,9 +44,12 @@ t_game	*create_game(char **map)
 
 	if (!map)
 		return (NULL);
-	game = malloc(sizeof(t_game));
+	game = malloc(sizeof(t_game)); // note: if game is NULL // leaks were found
 	if (!game)
+	{
+		free_map(map);
 		return (NULL);
+	}
 	game->map = map;
 	game->height = 0;
 	game->width = 0;
@@ -59,6 +62,7 @@ t_game	*create_game(char **map)
 	game->coins = 0;
 	game->moves = 0;
 	game->dir = 1;
+	game->exit_flag = 0;
 	init_imgs(game);
 	return (game);
 }
@@ -69,10 +73,10 @@ void	win_game(t_game *game)
 	close_game(game);
 }
 
-void	close_game(t_game *game)
+int	close_game(t_game *game)
 {
 	if (!game)
-		return ;
+		return (0);
 	if (game->win)
 		mlx_destroy_window(game->mlx, game->win);
 	if (game->map)
@@ -83,7 +87,13 @@ void	close_game(t_game *game)
 		mlx_destroy_display(game->mlx);
 		free(game->mlx);
 	}
-	if (game)
-		free(game);
+	free(game);
+	game = NULL;
 	exit(0);
 }
+
+// 2 Erros are being printed
+// Error
+// Map must have at least one collectable.
+// Error
+// Map must have one player and one exit ONLY!

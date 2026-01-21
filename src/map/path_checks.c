@@ -12,40 +12,21 @@
 
 #include "so_long.h"
 
-int	is_valid_path(char **map, size_t width, size_t height)
+void	flood_fill(char **map, t_game *game, size_t x, size_t y)
 {
-	size_t	i;
-	size_t	j;
- (void)width;
- (void)height;
-	i = 0;
-	while (map[i] /*i < height*/)
-	{
-		j = 0;
-		while (map[i][j] /*j < width*/)
-		{
-			if (map[i][j] == 'C' || map[i][j] == 'E')
-			{
-				return (0);
-			}
-			j++;
-		}
-		i++;
-	}
-	return (1);
-}
-
-void	flood_fill(char **map, size_t width, size_t height, size_t x, size_t y)
-{
-	if (x >= height || y >= width)
+	if (x >= game->height || y >= game->width)
 		return ;
 	if (map[x][y] == '1' || map[x][y] == 'V')
 		return ;
+	if (map[x][y] == 'C')
+		game->coins--;
+	if (map[x][y] == 'E')
+		game->exit_flag = 1;
 	map[x][y] = 'V';
-	flood_fill(map, width, height, x, y - 1);
-	flood_fill(map, width, height, x, y + 1);
-	flood_fill(map, width, height, x - 1, y);
-	flood_fill(map, width, height, x + 1, y);
+	flood_fill(map, game, x, y - 1);
+	flood_fill(map, game, x, y + 1);
+	flood_fill(map, game, x - 1, y);
+	flood_fill(map, game, x + 1, y);
 }
 
 char	**copy_map(t_game *game)
@@ -53,7 +34,7 @@ char	**copy_map(t_game *game)
 	char	**map_copy;
 	size_t	i;
 
-	map_copy = malloc((game->height + 1) * sizeof(char *));
+	map_copy = malloc((game->height + 1) * sizeof(char *) + 1);
 	if (!map_copy)
 		return (NULL);
 	i = 0;
@@ -67,28 +48,27 @@ char	**copy_map(t_game *game)
 		}
 		i++;
 	}
+	map_copy[game->height] = NULL;
 	return (map_copy);
 }
 
 int	check_path(t_game *game)
 {
 	char	**map_copy;
+	int		holder;
 
 	map_copy = copy_map(game);
+	holder = game->coins;
 	if (!map_copy)
 		return (0);
-	flood_fill(map_copy, game->width, game->height, game->pos_x, game->pos_x);
-	int x = 0;
-	while (map_copy[x])
-	{
-		ft_printf("%s", map_copy[x]);
-		x++;
-	}
-	if (!is_valid_path(map_copy, game->width, game->height))
+	flood_fill(map_copy, game, game->pos_x, game->pos_y);
+	if (game->coins != 0 || !game->exit_flag)
 	{
 		free_map(map_copy);
+		ft_putstr_fd("Error\nMap has no valid path.\n", 2);
 		return (0);
 	}
+	game->coins = holder;
 	free_map(map_copy);
 	return (1);
 }

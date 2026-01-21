@@ -20,6 +20,8 @@ void	try_move(t_game *game, size_t new_y, size_t new_x)
 	}
 	if (game->map[new_y][new_x] == 'E')
 	{
+		game->moves++;
+		ft_printf("Moves: %d\n", game->moves);
 		win_game(game);
 		return ;
 	}
@@ -35,7 +37,7 @@ void	try_move(t_game *game, size_t new_y, size_t new_x)
 	render_map(game);
 }
 
-void	handle_key(int key_code, t_game *game)
+int	handle_key(int key_code, t_game *game)
 {
 	if (key_code == W || key_code == UP)
 		move_up(game);
@@ -53,4 +55,5 @@ void	handle_key(int key_code, t_game *game)
 	}
 	else if (key_code == KEY_ESC || key_code == KEY_Q)
 		close_game(game);
+	return (0);
 }
