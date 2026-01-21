@@ -3,14 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   game_ctl.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anashwan <anashwan@student.42amman.com>    +#+  +:+       +#+        */
+/*   By: anashwan <anashwan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/02 00:52:21 by anashwan          #+#    #+#             */
-/*   Updated: 2026/01/15 20:22:02 by anashwan         ###   ########.fr       */
+/*   Updated: 2026/01/21 20:43:42 by anashwan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
+
+
 
 void	init_imgs(t_game *game)
 {
@@ -38,19 +40,8 @@ void	free_images(t_game *game)
 		mlx_destroy_image(game->mlx, game->exit_img);
 }
 
-t_game	*create_game(char **map)
+void	fill_data_fields(t_game *game)
 {
-	t_game	*game;
-
-	if (!map)
-		return (NULL);
-	game = malloc(sizeof(t_game)); // note: if game is NULL // leaks were found
-	if (!game)
-	{
-		free_map(map);
-		return (NULL);
-	}
-	game->map = map;
 	game->height = 0;
 	game->width = 0;
 	game->mlx = NULL;
@@ -63,6 +54,23 @@ t_game	*create_game(char **map)
 	game->moves = 0;
 	game->dir = 1;
 	game->exit_flag = 0;
+}
+
+t_game	*create_game(char **map)
+{
+	t_game	*game;
+
+	if (!map)
+		return (NULL);
+	game = malloc(sizeof(t_game)); // Checked
+	if (!game)
+	{
+		ft_putstr_fd("Error\nFailed allocation of memory for game.\n", 2);
+		free_map(map);
+		return (NULL);
+	}
+	game->map = map;
+	fill_data_fields(game);
 	init_imgs(game);
 	return (game);
 }

@@ -6,7 +6,7 @@
 /*   By: anashwan <anashwan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/10 17:10:17 by anashwan          #+#    #+#             */
-/*   Updated: 2026/01/10 17:48:16 by anashwan         ###   ########.fr       */
+/*   Updated: 2026/01/21 19:23:59 by anashwan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,14 +40,18 @@ int	main(int argc, char **argv)
 		return (1);
 	}
 	fd = open(argv[1], O_RDONLY);
-	game = create_game(get_map(fd));
-	if (!game)
+	if (fd == -1)
 	{
-		ft_putstr_fd("Error\nCouldn't allocate game.\n", 2);
+		ft_putstr_fd("Error\nInvaid file descriptor\n", 2);
 		return (1);
 	}
-	if (!validate_map(game))
+	game = create_game(get_map(fd));
+	close(fd);
+	if (!game || !validate_map(game))
+	{
 		close_game(game);
+		return (1);
+	}
 	start_game(game);
 	return (0);
 }

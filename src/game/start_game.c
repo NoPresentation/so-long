@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   start_game.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anashwan <anashwan@student.42amman.com>    +#+  +:+       +#+        */
+/*   By: anashwan <anashwan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/03 22:34:41 by anashwan          #+#    #+#             */
-/*   Updated: 2026/01/15 20:26:06 by anashwan         ###   ########.fr       */
+/*   Updated: 2026/01/21 20:38:37 by anashwan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,12 +96,12 @@ void	start_game(t_game *game)
 {
 	if (game && !init_mlx(game))
 	{
-		ft_putstr_fd("Game initialize failure.", 2);
+		ft_putstr_fd("Error\nGame initialize failure.\n", 2);
 		close_game(game);
 	}
 	if (game && !load_images(game))
 	{
-		ft_putstr_fd("Failed to load images!", 2);
+		ft_putstr_fd("Error\nFailed to load images!\n", 2);
 		close_game(game);
 	}
 	render_map(game);
