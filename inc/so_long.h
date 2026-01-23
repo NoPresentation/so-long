@@ -6,7 +6,7 @@
 /*   By: anashwan <anashwan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/26 19:08:08 by anashwan          #+#    #+#             */
-/*   Updated: 2026/01/23 16:23:36 by anashwan         ###   ########.fr       */
+/*   Updated: 2026/01/23 16:38:08 by anashwan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,9 +68,9 @@ typedef struct s_game
 
 // Map
 char		**get_map(int fd);
+char		*read_map(int fd);
 void		render_map(t_game *game);
 void		free_map(char **map);
-char		*read_map(int fd);
 
 // Map validation
 int			correct_len(char *line, int len);
@@ -90,9 +90,9 @@ void		win_game(t_game *game);
 int			close_game(t_game *game);
 
 // MLX
-void		fill_pixel(t_game *game, char tile, int x, int y);
-int			load_images(t_game *game);
 int			init_mlx(t_game *game);
+int			load_images(t_game *game);
+void		fill_pixel(t_game *game, char tile, int x, int y);
 void		*get_img(void *mlx, char *path, int *w, int *h);
 
 // Moves
