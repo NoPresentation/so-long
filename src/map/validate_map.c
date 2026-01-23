@@ -12,7 +12,7 @@
 
 #include "so_long.h"
 
-void	find_player_exit(t_game *game)
+static void	find_player_exit(t_game *game)
 {
 	int	i;
 	int	j;
@@ -52,7 +52,6 @@ int	validate_map(t_game *game)
 	find_player_exit(game);
 	if (!check_path(game))
 		return (0);
-	// We hide the exit until the player collects all collectables.
-	game->map[game->exit_y][game->exit_x] = '0'; 
+	game->map[game->exit_y][game->exit_x] = '0';
 	return (1);
 }

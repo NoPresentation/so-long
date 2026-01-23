@@ -76,9 +76,9 @@ static char	*create_string(const char *s, char c)
 	return (str);
 }
 
-static	void *free_split(char **list, int elements)
+static void	*free_split(char **list, int elements)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (i < elements)

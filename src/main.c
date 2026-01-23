@@ -14,7 +14,7 @@
 
 int	check_ber(char *file_name)
 {
-	char *dot;
+	char	*dot;
 
 	if (!file_name || ft_strlen(file_name) < 5)
 		return (0);

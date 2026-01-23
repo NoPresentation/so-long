@@ -12,29 +12,29 @@
 
 #include "so_long.h"
 
-void	flood_fill(char **map, t_game *game, size_t x, size_t y)
+static void	flood_fill(char **map, t_game *game, int x, int y)
 {
-	if (x >= game->height || y >= game->width)
+	if (y >= game->height || x >= game->width)
 		return ;
-	if (map[x][y] == '1' || map[x][y] == 'V')
+	if (map[y][x] == '1' || map[y][x] == 'V')
 		return ;
-	if (map[x][y] == 'C')
+	if (map[y][x] == 'C')
 		game->coins--;
-	if (map[x][y] == 'E')
+	if (map[y][x] == 'E')
 		game->exit_flag = 1;
-	map[x][y] = 'V';
+	map[y][x] = 'V';
 	flood_fill(map, game, x, y - 1);
 	flood_fill(map, game, x, y + 1);
 	flood_fill(map, game, x - 1, y);
 	flood_fill(map, game, x + 1, y);
 }
 
-char	**copy_map(t_game *game)
+static char	**copy_map(t_game *game)
 {
 	char	**map_copy;
-	size_t	i;
+	int		i;
 
-	map_copy = malloc((game->height + 1) * sizeof(char *) + 1);
+	map_copy = malloc((game->height + 1) * sizeof(char *));
 	if (!map_copy)
 		return (NULL);
 	i = 0;
@@ -60,7 +60,10 @@ int	check_path(t_game *game)
 	map_copy = copy_map(game);
 	holder = game->coins;
 	if (!map_copy)
+	{
+		ft_putstr_fd("Error\nMemory allocation error.\n", 2);
 		return (0);
+	}
 	flood_fill(map_copy, game, game->pos_x, game->pos_y);
 	if (game->coins != 0 || !game->exit_flag)
 	{

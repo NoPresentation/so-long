@@ -12,64 +12,70 @@
 
 #include "so_long.h"
 
-
-
-bool	correct_len(char *line, size_t len)
+static void	free_gnl(int fd)
 {
-	size_t	line_len;
+	char	*line;
 
+	line = get_next_line(fd);
+	while (line)
+	{
+		free(line);
+		line = get_next_line(fd);
+	}
+}
+
+static int	correct_len(char *line, int len)
+{
+	int	line_len;
+
+	if (!line)
+		return (0);
 	line_len = ft_strlen(line);
 	if (line[line_len - 1] == '\n')
 		line_len--;
 	if (line_len != len)
-	{
-		ft_putstr_fd("Error\nLines are not the same length.\n", 2);
-		return (false);
-	}
-	return (true);
+		return (0);
+	return (1);
 }
 
-char	*read_map(int fd)
+static void	free_reader(int fd, char *reader, char *line, char *temp)
+{
+	if (reader)
+		free(reader);
+	if (line)
+		free(line);
+	if (temp)
+		free(temp);
+	if (fd != -1)
+		free_gnl(fd);
+}
+
+static char	*read_map(int fd)
 {
 	char	*line;
 	char	*reader;
 	char	*temp;
+	size_t	len;
 
-	reader = ft_strdup(""); // CHECKED
+	reader = ft_strdup("");
 	if (!reader)
 		return (NULL);
 	line = get_next_line(fd);
+	len = ft_strlen(line) - 1;
 	while (line)
 	{
 		temp = reader;
-		reader = ft_strjoin(reader, line); // No leak, still reachable
-		if (!reader)
+		reader = ft_strjoin(reader, line);
+		if (!reader || !correct_len(line, len))
 		{
-			free(line);
-			free(temp);
+			free_reader(fd, reader, line, temp);
 			return (NULL);
 		}
-		free(line);
-		free(temp);
+		free_reader(-1, NULL, line, temp);
 		line = get_next_line(fd);
 	}
 	free(line);
 	return (reader);
-}
-
-void    free_map(char **map)
-{
-    int i;
-
-	i = 0;
-	if (!map)
-		return ;
-	while (map[i])
-	{
-		free(map[i]);
-		i++;
-	}
-	free(map);
 }
 
 char	**get_map(int fd)
@@ -85,10 +91,11 @@ char	**get_map(int fd)
 	reader = read_map(fd);
 	if (!reader)
 	{
-		ft_putstr_fd("Error\nCouldn't read from file.\n", 2);
+		ft_putstr_fd("Error\nLine length error (Possible memory allocation )\n",
+			2);
 		return (NULL);
 	}
-	map = ft_split(reader, '\n'); // Checked
+	map = ft_split(reader, '\n');
 	free(reader);
 	if (!map || map[0] == NULL)
 	{

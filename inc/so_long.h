@@ -41,13 +41,13 @@ typedef struct s_game
 {
 	/* Map data */
 	char	**map;
-	size_t	width;
-	size_t	height;
-	size_t	coins;
-	size_t	pos_x;
-	size_t	pos_y;
-	size_t	exit_x;
-	size_t	exit_y;
+	int		width;
+	int		height;
+	int		coins;
+	int		pos_x;
+	int		pos_y;
+	int		exit_y;
+	int		exit_x;
 	int		exit_flag;
 	int		dir;
 
@@ -63,43 +63,38 @@ typedef struct s_game
 	void	*exit_img;
 	void	*coin_img;
 
-	size_t	moves;
+	int		moves;
 }			t_game;
 
+// Map
+char		**get_map(int fd);
+void		render_map(t_game *game);
+void		free_map(char **map);
 
-// Checks
+// Map validation
 int			validate_map(t_game *game);
 int			check_rectangle(t_game *game);
 int			check_walls(t_game *game);
-int			is_valid_path(char **map, size_t width, size_t height);
-int			check_path(t_game *game);
-int			count_occurance(const char *s, char c);
-void		find_player(t_game *game);
-int			check_components(t_game *game);
 int			check_chars(t_game *game);
+int			check_components(t_game *game);
+int			check_path(t_game *game);
 
-// Get map
-char		**get_map(int fd);
-void		free_map(char **map);
-char		*read_map(int fd);
-
-// Game Start
+// Game
 t_game		*create_game(char **map);
+void		fill_data_fields(t_game *game);
+void		init_imgs(t_game *game);
 void		start_game(t_game *game);
-int			init_mlx(t_game *game);
-int			load_images(t_game *game);
-void		render_map(t_game *game);
-void		flood_fill(char **map,t_game *game, size_t x, size_t y);
-
-// Movement and Events
-int			handle_key(int key_code, t_game *game);
-void		move_left(t_game *game);
-void		move_right(t_game *game);
-void		move_up(t_game *game);
-void		move_down(t_game *game);
-void		try_move(t_game *game, size_t new_y, size_t new_x);
-
-// Game end
-int		close_game(t_game *game);
 void		win_game(t_game *game);
+int			close_game(t_game *game);
+
+// MLX
+void		fill_pixel(t_game *game, char tile, int x, int y);
+int			load_images(t_game *game);
+int			init_mlx(t_game *game);
+void		*get_img(void *mlx, char *path, int *w, int *h);
+
+// Moves
+int			handle_key(int key_code, t_game *game);
+void		try_move(t_game *game, int new_y, int new_x);
+
 #endif

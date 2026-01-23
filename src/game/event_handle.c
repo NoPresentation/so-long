@@ -12,7 +12,7 @@
 
 #include "so_long.h"
 
-void	try_move(t_game *game, size_t new_y, size_t new_x)
+void	try_move(t_game *game, int new_y, int new_x)
 {
 	if (game->map[new_y][new_x] == 'C')
 	{
@@ -35,25 +35,4 @@ void	try_move(t_game *game, size_t new_y, size_t new_x)
 	ft_printf("Moves: %d\n", game->moves);
 	mlx_clear_window(game->mlx, game->win);
 	render_map(game);
-}
-
-int	handle_key(int key_code, t_game *game)
-{
-	if (key_code == W || key_code == UP)
-		move_up(game);
-	else if (key_code == S || key_code == DOWN)
-		move_down(game);
-	else if (key_code == D || key_code == RIGHT)
-	{
-		game->dir = 1;
-		move_right(game);
-	}
-	else if (key_code == A || key_code == LEFT)
-	{
-		game->dir = 0;
-		move_left(game);
-	}
-	else if (key_code == KEY_ESC || key_code == KEY_Q)
-		close_game(game);
-	return (0);
 }

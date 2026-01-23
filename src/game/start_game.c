@@ -29,31 +29,19 @@ int	load_images(t_game *game)
 	int	w;
 	int	h;
 
-	game->wall_img = mlx_xpm_file_to_image(game->mlx, "./imgs/border.xpm", &w,
-			&h);
-	if (!game->wall_img)
-		return (0);
-	game->floor_img = mlx_xpm_file_to_image(game->mlx, "./imgs/green.xpm", &w,
-			&h);
-	if (!game->floor_img)
-		return (0);
-	game->pr = mlx_xpm_file_to_image(game->mlx, "./imgs/bird_right.xpm", &w, &h);
-	if (!game->pr)
-		return (0);
-	game->pl = mlx_xpm_file_to_image(game->mlx, "./imgs/bird_left.xpm", &w,&h);
-	if (!game->pl)
-		return (0);
-	game->coin_img = mlx_xpm_file_to_image(game->mlx, "./imgs/apple.xpm", &w,
-			&h);
-	if (!game->coin_img)
-		return (0);
-	game->exit_img = mlx_xpm_file_to_image(game->mlx, "./imgs/escape.xpm", &w,&h);
-	if (!game->exit_img)
+	game->wall_img = get_img(game->mlx, "./imgs/border.xpm", &w, &h);
+	game->floor_img = get_img(game->mlx, "./imgs/green.xpm", &w, &h);
+	game->pr = get_img(game->mlx, "./imgs/bird_right.xpm", &w, &h);
+	game->pl = get_img(game->mlx, "./imgs/bird_left.xpm", &w, &h);
+	game->coin_img = get_img(game->mlx, "./imgs/apple.xpm", &w, &h);
+	game->exit_img = get_img(game->mlx, "./imgs/escape.xpm", &w, &h);
+	if (!game->wall_img || !game->floor_img || !game->pr || !game->pl
+		|| !game->coin_img || !game->exit_img)
 		return (0);
 	return (1);
 }
 
-void	fill_pixel(t_game *game, char tile, size_t x, size_t y)
+void	fill_pixel(t_game *game, char tile, int x, int y)
 {
 	mlx_put_image_to_window(game->mlx, game->win, game->floor_img, x, y);
 	if (tile == '1')
@@ -72,10 +60,10 @@ void	fill_pixel(t_game *game, char tile, size_t x, size_t y)
 
 void	render_map(t_game *game)
 {
-	size_t	h;
-	size_t	x;
-	size_t	w;
-	size_t	y;
+	int	h;
+	int	x;
+	int	w;
+	int	y;
 
 	h = 0;
 	while (h < game->height)

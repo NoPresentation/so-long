@@ -14,14 +14,14 @@
 
 int	check_rectangle(t_game *game)
 {
-	size_t	width;
-	size_t	i;
+	int	width;
+	int	i;
 
 	width = ft_strlen(game->map[0]);
 	i = 1;
 	while (game->map[i])
 	{
-		if (ft_strlen(game->map[i]) != width)
+		if ((int)ft_strlen(game->map[i]) != width)
 		{
 			ft_putstr_fd("Error\nMap not a rectangle.\n", 2);
 			return (0);
@@ -35,8 +35,8 @@ int	check_rectangle(t_game *game)
 
 int	check_walls(t_game *game)
 {
-	size_t	i;
-	size_t	j;
+	int	i;
+	int	j;
 
 	i = 0;
 	j = 0;
@@ -61,7 +61,7 @@ int	check_walls(t_game *game)
 	return (1);
 }
 
-int	count_occurance(const char *s, char c)
+static int	count_occurance(const char *s, char c)
 {
 	int	count;
 	int	i;
@@ -109,8 +109,8 @@ int	check_components(t_game *game)
 
 int	check_chars(t_game *game)
 {
-	size_t	i;
-	size_t	j;
+	int		i;
+	int		j;
 	char	**map;
 
 	i = 0;
@@ -121,7 +121,7 @@ int	check_chars(t_game *game)
 		while (j < game->width)
 		{
 			if (map[i][j] != '1' && map[i][j] != '0' && map[i][j] != 'P'
-					&& map[i][j] != 'E' && map[i][j] != 'C')
+				&& map[i][j] != 'E' && map[i][j] != 'C')
 			{
 				ft_putstr_fd("Error\nFound invalid character.\n", 2);
 				return (0);
