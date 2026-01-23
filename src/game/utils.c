@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: anashwan <anashwan@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/01/23 16:34:34 by anashwan          #+#    #+#             */
+/*   Updated: 2026/01/23 16:35:09 by anashwan         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "so_long.h"
 
 void	init_imgs(t_game *game)
@@ -51,7 +63,7 @@ void	free_map(char **map)
 
 int	correct_len(char *line, int len)
 {
-	int line_len;
+	int	line_len;
 
 	if (!line)
 		return (0);

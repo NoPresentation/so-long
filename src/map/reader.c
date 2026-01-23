@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   reader.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: anashwan <anashwan@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/01/23 16:34:19 by anashwan          #+#    #+#             */
+/*   Updated: 2026/01/23 16:34:20 by anashwan         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "so_long.h"
 
 static void	free_gnl(int fd)
@@ -62,12 +74,12 @@ char	*read_map(int fd)
 	size_t	len;
 
 	reader = ft_strdup("");
-	if (!reader)
+	line = get_next_line(fd);
+	if (!reader || !line)
 	{
 		ft_putstr_fd("Error\nCouldn't read from file.\n", 2);
 		return (NULL);
 	}
-	line = get_next_line(fd);
 	len = ft_strlen(line) - 1;
 	while (line)
 	{

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anashwan <anashwan@student.42amman.com>    +#+  +:+       +#+        */
+/*   By: anashwan <anashwan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/26 19:08:08 by anashwan          #+#    #+#             */
-/*   Updated: 2026/01/15 20:39:51 by anashwan         ###   ########.fr       */
+/*   Updated: 2026/01/23 16:23:36 by anashwan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ void		free_map(char **map);
 char		*read_map(int fd);
 
 // Map validation
-int			correct_len(char *line, size_t len);
+int			correct_len(char *line, int len);
 int			validate_map(t_game *game);
 int			check_rectangle(t_game *game);
 int			check_walls(t_game *game);
