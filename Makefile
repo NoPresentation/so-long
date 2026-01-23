@@ -9,6 +9,7 @@ SRC = 	./src/main.c \
 		./src/game/moves.c \
 		./src/game/event_handle.c \
 		./src/game/utils.c \
+		./src/map/reader.c \
 		./src/map/validate_map.c \
 		./src/map/path_checks.c \
 		./src/map/structure_checks.c \

@@ -48,3 +48,17 @@ void	free_map(char **map)
 	}
 	free(map);
 }
+
+int	correct_len(char *line, int len)
+{
+	int line_len;
+
+	if (!line)
+		return (0);
+	line_len = ft_strlen(line);
+	if (line[line_len - 1] == '\n')
+		line_len--;
+	if (line_len != len)
+		return (0);
+	return (1);
+}

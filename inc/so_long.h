@@ -70,8 +70,10 @@ typedef struct s_game
 char		**get_map(int fd);
 void		render_map(t_game *game);
 void		free_map(char **map);
+char		*read_map(int fd);
 
 // Map validation
+int			correct_len(char *line, size_t len);
 int			validate_map(t_game *game);
 int			check_rectangle(t_game *game);
 int			check_walls(t_game *game);
